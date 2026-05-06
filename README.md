@@ -2,6 +2,8 @@
 Santhana Madha Traders — Steel Ring Management System A Java Swing desktop application for managing the complete operations of a steel ring manufacturing business — from raw material procurement and labour management to production, sales, and waste tracking.  Built with core Java OOP principles, a MySQL backend, and a clean GUI using Java Swing.
 
 
+
+
 ModuleDescription
 Login & SignupSecure user authentication with security question and forget-password flow
 Raw MaterialAdd, update, and view raw material stock with date-range reports via stored procedures
@@ -59,8 +61,7 @@ src/
     ├── WageRecord.java        # Encapsulation model — wage
     └── WasteRecord.java       # Encapsulation model — waste
 icons/                         # UI background images
-
-👥 Authors
+ Authors
 Developed by Amali, Aarthi, and Samreen as part of a Java desktop application project.
 
-⭐ If you found this useful, give it a star on GitHub!Content1777728220758_SMT.docxdocx1777802330536_package waste.docxdocx
+
