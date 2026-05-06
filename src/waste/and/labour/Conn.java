@@ -1,34 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package waste.and.labour;
 
 import java.sql.*;
 
 /**
  * Conn class is used to establish a connection with the MySQL database.
- * 
- * This class loads the MySQL JDBC driver, connects to the database
- * named "steel_management", and creates a Statement object for executing SQL queries.
- * 
- * 
- * Database Details:
- *
- *   URL: jdbc:mysql://localhost:3306/steel_management
- *   Username: root
- *   Password: Amali@123
- * 
- *
- * Usage:
- * 
- *     Conn conn = new Conn();
- * 
- * 
- * 
- * @author amali
- * @authiir aarthi
- * @author samreen
+ 
+
  */
 public class Conn {
 
@@ -47,17 +25,16 @@ public class Conn {
      */
     public Conn() {
         try {
-            // Load MySQL JDBC Driver
+     
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish connection
             c = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/steel_management",
                 "root",
                 "Amali@123"
             );
 
-            // Create statement object
+        
             s = c.createStatement();
 
             System.out.println("Connected");
