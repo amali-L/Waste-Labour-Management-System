@@ -124,9 +124,6 @@ public class Bill extends JFrame implements BillUI {
         setVisible(true);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  BuyerForm – supports multiple items in a live table
-    // ─────────────────────────────────────────────────────────────────────────
     class BuyerForm extends JFrame implements BillUI {
 
         JTextField tfName, tfDate, tfBill, tfItem, tfQty, tfRate;
@@ -150,13 +147,13 @@ public class Bill extends JFrame implements BillUI {
             add(bg);
             addTitle(bg, "BUYER BILL");
 
-            // ── Left panel: customer details + item entry ──────────────────
+            
             JPanel left = new JPanel(null);
             left.setBounds(320, 130, 420, 620);
             left.setBackground(new Color(255, 255, 255, 220));
             bg.add(left);
 
-            // Customer details
+      
             JLabel secInfo = new JLabel("Customer Details");
             secInfo.setBounds(20, 10, 200, 25);
             secInfo.setFont(new Font("Arial", Font.BOLD, 14));
@@ -175,7 +172,6 @@ public class Bill extends JFrame implements BillUI {
             sep.setBounds(10, 165, 395, 2);
             left.add(sep);
 
-            // Item entry section
             JLabel secItem = new JLabel("Add Item");
             secItem.setBounds(20, 175, 200, 25);
             secItem.setFont(new Font("Arial", Font.BOLD, 14));
@@ -203,7 +199,6 @@ public class Bill extends JFrame implements BillUI {
             btnClear.setFont(new Font("Arial", Font.BOLD, 13));
             left.add(btnClear);
 
-            // Total label
             lblTotal = new JLabel("TOTAL: ₹ 0");
             lblTotal.setBounds(10, 435, 390, 30);
             lblTotal.setFont(new Font("Arial", Font.BOLD, 16));
@@ -217,7 +212,7 @@ public class Bill extends JFrame implements BillUI {
             btnGen.setFont(new Font("Arial", Font.BOLD, 14));
             left.add(btnGen);
 
-            // ── Right panel: live preview table ───────────────────────────
+           
             JPanel right = new JPanel(null);
             right.setBounds(760, 130, 580, 600);
             right.setBackground(new Color(255, 255, 255, 220));
@@ -242,7 +237,7 @@ public class Bill extends JFrame implements BillUI {
             sp.setBounds(10, 45, 550, 520);
             right.add(sp);
 
-            // ── Button actions ─────────────────────────────────────────────
+    
             btnAdd.addActionListener(e -> {
                 String itemTxt = tfItem.getText().trim();
                 String qtyTxt  = tfQty .getText().trim();
@@ -265,7 +260,6 @@ public class Bill extends JFrame implements BillUI {
                             items.size(), itemTxt, q, r, amt
                     });
 
-                    // Recalculate total
                     int total = 0;
                     for (int i = 0; i < items.size(); i++) total += qtys.get(i) * rates.get(i);
                     lblTotal.setText("TOTAL: ₹ " + total);
@@ -323,7 +317,7 @@ public class Bill extends JFrame implements BillUI {
                 com.itextpdf.text.Font normal12  =
                         FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-                // Header
+              
                 Paragraph header = new Paragraph("SANTHANA MADHA TRADERS", boldLarge);
                 header.setAlignment(Element.ALIGN_CENTER);
                 doc.add(header);
@@ -335,25 +329,25 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(new Paragraph("Sivakasi | Phone: 8248184142", normal12));
                 doc.add(new Paragraph(" "));
 
-                // Customer info
+         
                 doc.add(new Paragraph("Customer : " + tfName.getText().trim(), normal12));
                 doc.add(new Paragraph("Date     : " + tfDate.getText().trim(), normal12));
                 doc.add(new Paragraph("Bill No  : " + tfBill.getText().trim(), normal12));
                 doc.add(new Paragraph(" "));
 
-                // Items table
+       
                 PdfPTable table = new PdfPTable(5);
                 table.setWidthPercentage(100);
                 table.setWidths(new float[]{1f, 3f, 2f, 2f, 2f});
 
-                // Header row with background
+         
                 com.itextpdf.text.BaseColor headerBg =
                         new com.itextpdf.text.BaseColor(20, 40, 150);
 
                 for (String h : new String[]{"S.No", "Item / Ring Size", "Quantity", "Rate (₹)", "Amount (₹)"}) {
                     PdfPCell cell = new PdfPCell(new Phrase(h, bold12));
                     cell.setBackgroundColor(headerBg);
-                    // Make header text white
+           
                     com.itextpdf.text.Font whiteFont =
                             FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12,
                                     com.itextpdf.text.Font.BOLD,
@@ -364,12 +358,11 @@ public class Bill extends JFrame implements BillUI {
                     table.addCell(cell);
                 }
 
-                // Data rows
                 for (int i = 0; i < items.size(); i++) {
                     int amt = qtys.get(i) * rates.get(i);
                     totalAll += amt;
 
-                    // Alternating row colour
+              
                     com.itextpdf.text.BaseColor rowBg = (i % 2 == 0)
                             ? com.itextpdf.text.BaseColor.WHITE
                             : new com.itextpdf.text.BaseColor(235, 240, 255);
@@ -392,7 +385,7 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(table);
                 doc.add(new Paragraph(" "));
 
-                // Total
+            
                 Paragraph totalPara = new Paragraph("TOTAL: ₹ " + totalAll, bold12);
                 totalPara.setAlignment(Element.ALIGN_RIGHT);
                 doc.add(totalPara);
@@ -400,7 +393,7 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(new Paragraph(" "));
                 doc.add(new Paragraph(" "));
 
-                // Signature
+       
                 Paragraph sign1 = new Paragraph("For SANTHANA MADHA TRADERS", normal12);
                 sign1.setAlignment(Element.ALIGN_RIGHT);
                 doc.add(sign1);
@@ -419,9 +412,7 @@ public class Bill extends JFrame implements BillUI {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  SalaryForm – with reference bill number and DB save
-    // ─────────────────────────────────────────────────────────────────────────
+
     class SalaryForm extends JFrame implements BillUI {
 
         JTextField tfName, tfDays, tfSalary, tfBillNo, tfDate, tfRefBill;
@@ -449,7 +440,7 @@ public class Bill extends JFrame implements BillUI {
 
             addLabel(p, "Worker Name :",     10, 50);
             addLabel(p, "Bill No :",         10, 95);
-            addLabel(p, "Ref. Bill No :",    10, 140);   // ← NEW reference field
+            addLabel(p, "Ref. Bill No :",    10, 140);   
             addLabel(p, "Date :",            10, 185);
             addLabel(p, "Days Worked :",     10, 230);
             addLabel(p, "Daily Wage (₹) :",  10, 275);
@@ -461,14 +452,13 @@ public class Bill extends JFrame implements BillUI {
             tfDays   = new JTextField(); tfDays  .setBounds(170, 230, 270, 32); p.add(tfDays);
             tfSalary = new JTextField(); tfSalary.setBounds(170, 275, 270, 32); p.add(tfSalary);
 
-            // Live total calculation
             lblTotal = new JLabel("Total Salary: ₹ --");
             lblTotal.setBounds(20, 325, 420, 30);
             lblTotal.setFont(new Font("Arial", Font.BOLD, 15));
             lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
             p.add(lblTotal);
 
-            // Update total as user types
+           
             javax.swing.event.DocumentListener dl = new javax.swing.event.DocumentListener() {
                 public void insertUpdate (javax.swing.event.DocumentEvent e) { updateTotal(); }
                 public void removeUpdate (javax.swing.event.DocumentEvent e) { updateTotal(); }
@@ -504,7 +494,7 @@ public class Bill extends JFrame implements BillUI {
         void saveAndGenerate() {
             String name    = tfName   .getText().trim();
             String billNo  = tfBillNo .getText().trim();
-            String refBill = tfRefBill.getText().trim();   // reference bill
+            String refBill = tfRefBill.getText().trim();   
             String date    = tfDate   .getText().trim();
 
             if (name.isEmpty() || billNo.isEmpty() || date.isEmpty()
@@ -519,7 +509,7 @@ public class Bill extends JFrame implements BillUI {
                 int s     = Integer.parseInt(tfSalary.getText().trim());
                 int total = d * s;
 
-                // Save to database
+            
                 Connection con = DBConnection.getConnection();
                 if (con != null) {
                     PreparedStatement ps = con.prepareStatement(
@@ -536,7 +526,6 @@ public class Bill extends JFrame implements BillUI {
                     con.close();
                 }
 
-                // Generate PDF
                 Document doc  = new Document();
                 String   path = getBillsDir() + "\\Salary_" + billNo
                                 + "_" + System.currentTimeMillis() + ".pdf";
@@ -550,7 +539,6 @@ public class Bill extends JFrame implements BillUI {
                 com.itextpdf.text.Font normal12  =
                         FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-                // Header
                 Paragraph header = new Paragraph("SANTHANA MADHA TRADERS", boldLarge);
                 header.setAlignment(Element.ALIGN_CENTER);
                 doc.add(header);
@@ -562,11 +550,10 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(new Paragraph("Sivakasi | Phone: 8248184142", normal12));
                 doc.add(new Paragraph(" "));
 
-                // Worker details
                 doc.add(new Paragraph("Worker Name : " + name,    normal12));
                 doc.add(new Paragraph("Bill No     : " + billNo,  normal12));
 
-                // Reference bill (shown only if provided)
+            
                 if (!refBill.isEmpty()) {
                     doc.add(new Paragraph("Ref Bill No : " + refBill, normal12));
                 }
@@ -574,7 +561,6 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(new Paragraph("Date        : " + date, normal12));
                 doc.add(new Paragraph(" "));
 
-                // Salary table
                 PdfPTable table = new PdfPTable(5);
                 table.setWidthPercentage(100);
                 table.setWidths(new float[]{1f, 3f, 2f, 2f, 2f});
@@ -594,7 +580,7 @@ public class Bill extends JFrame implements BillUI {
                     table.addCell(cell);
                 }
 
-                // Data row
+            
                 com.itextpdf.text.BaseColor rowBg =
                         new com.itextpdf.text.BaseColor(235, 240, 255);
                 for (String val : new String[]{
@@ -610,7 +596,6 @@ public class Bill extends JFrame implements BillUI {
                 doc.add(table);
                 doc.add(new Paragraph(" "));
 
-                // Total
                 Paragraph tot = new Paragraph("TOTAL: ₹ " + total, bold12);
                 tot.setAlignment(Element.ALIGN_RIGHT);
                 doc.add(tot);
