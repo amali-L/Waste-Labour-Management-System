@@ -12,7 +12,8 @@ public class About extends JFrame {
         setLayout(null);
 
         JLabel l1 = new JLabel("<html><center>SANTHANA MADHA TRADERS<br><br>"
-                + "Developed by: AARTHI T S "
+                + "Developed by: "
+                 +   " AARTHI T S "
                 + "AMALI ROOBA FELIX L"
                 + "KURSHID SAMREEN A H"
                 + "Project for Mini Project<br>"
